@@ -62,6 +62,9 @@ freebsd:
 beos:
 	make -f BeOS/Makefile
 
+haiku:
+	make -f Haiku/Makefile
+
 bcl:
 	make -f DOS\Large\Borland\Makefile
 

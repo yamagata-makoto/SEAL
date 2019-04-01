@@ -3,7 +3,7 @@
 CC = gcc
 AR = ar 
 AS = nasm
-CFLAGS = -c -O3 -Wall -Wno-multichar -D__ASM__ -D__FLAT__
+CFLAGS = -c -O3 -Wall -Wno-multichar -D__ASM__ -D__FLAT__ -D__BEOS__
 ARFLAGS = cr
 LIBS = -L../lib/Haiku/ -laudio -lroot -lbe -lmedia
 

@@ -3,12 +3,12 @@
 CC = gcc
 AR = ar 
 AS = nasm
-CFLAGS = -c -O3 -Wall -Wno-multichar -D__ASM__ -D__FLAT__ -D__BEOS__
+CFLAGS = -c -O3 -Wall -Wno-multichar -D__FLAT__ -D__BEOS__
 ARFLAGS = cr
-LIBS = -L../lib/Haiku/ -laudio -lroot -lbe -lmedia
+LIBS = -L../lib/Haiku/ -laudio -lroot -lbe -lmedia -lstdc++
 
 OBJS = audio.o wavfile.o xmfile.o s3mfile.o modfile.o mtmfile.o \
-	iofile.o modeng.o nondrv.o mixdrv.o _mixdrv.o be3drv.o be4drv.o bedrv.o
+	iofile.o modeng.o nondrv.o mixdrv.o be3drv.o be4drv.o bedrv.o
 
 LIB = ../lib/Haiku/libaudio.a
 

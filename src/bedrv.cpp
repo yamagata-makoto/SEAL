@@ -72,10 +72,6 @@ static void PlayAudio(void *cookie, void *buffer, size_t size,
     if (fmt.format != media_raw_audio_format::B_AUDIO_FLOAT ||
         fmt.channel_count != 2 || fmt.frame_rate != 44100 ||
         Audio.lpfnAudioWave == NULL) {
-		printf("fm.format = 0x%x\n", fmt.format);
-		printf("fm.channel_count = %d\n", fmt.channel_count);
-		printf("fm.frame_rate = %d\n", fmt.frame_rate);
-		printf("Audio.fpfnAudioWave = %p\n", Audio.lpfnAudioWave);
         memset(buffer, 0, size);
     }
     else {

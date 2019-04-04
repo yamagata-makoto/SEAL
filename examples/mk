@@ -25,6 +25,10 @@ case `uname -sr` in
      CC=gcc
      STRIP=true
      LIBS="-L../lib/BeOS -laudio -lroot -lbe -lmedia" ;;
+  Haiku*)
+     CC=gcc
+     STRIP=true
+     LIBS="-L../lib/Haiku -laudio -lroot -lbe -lmedia" ;;
   *) 
      echo "This program has not been tested on your machine!"
      exit

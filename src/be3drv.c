@@ -101,6 +101,7 @@ static UINT AIAPI OpenAudio(LPAUDIOINFO lpInfo)
     struct audio_params params;
     int index;
 
+    printf("OpenAudio Be3\n");
     memset(&Audio, 0, sizeof(Audio));
 
     /* search an old audio device for playback */

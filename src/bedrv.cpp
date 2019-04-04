@@ -72,6 +72,10 @@ static void PlayAudio(void *cookie, void *buffer, size_t size,
     if (fmt.format != media_raw_audio_format::B_AUDIO_FLOAT ||
         fmt.channel_count != 2 || fmt.frame_rate != 44100 ||
         Audio.lpfnAudioWave == NULL) {
+		printf("fm.format = 0x%x\n", fmt.format);
+		printf("fm.channel_count = %d\n", fmt.channel_count);
+		printf("fm.frame_rate = %d\n", fmt.frame_rate);
+		printf("Audio.fpfnAudioWave = %p\n", Audio.lpfnAudioWave);
         memset(buffer, 0, size);
     }
     else {
@@ -115,13 +119,21 @@ static UINT AIAPI PingAudio(VOID)
 
 static UINT AIAPI OpenAudio(LPAUDIOINFO lpInfo)
 {
+	media_raw_audio_format format;
+	format = media_raw_audio_format::wildcard;
+	format.format = media_raw_audio_format::B_AUDIO_FLOAT;
+	format.byte_order = B_HOST_IS_LENDIAN? B_MEDIA_LITTLE_ENDIAN: B_MEDIA_BIG_ENDIAN;
+	format.channel_count = 2;
+	format.buffer_size = 1024 * sizeof(float);
+	format.frame_rate = 44100;
+
     /* clean up local state structure */
     memset(&Audio, 0, sizeof(Audio));
 
     /* create sound player */
-    if ((Audio.Player = new BSoundPlayer("SEAL Player", PlayAudio)) == NULL)
-	return AUDIO_ERROR_NODEVICE;
-
+    if ((Audio.Player = new BSoundPlayer(&format, "SEAL Player", PlayAudio)) == NULL) {
+        return AUDIO_ERROR_NODEVICE;
+    }
     /* force default settings */
     lpInfo->nSampleRate = 44100;
     lpInfo->wFormat = AUDIO_FORMAT_16BITS | AUDIO_FORMAT_STEREO;
@@ -162,13 +174,13 @@ static UINT AIAPI SetAudioCallback(LPFNAUDIOWAVE lpfnAudioWave)
 /*
  * BeOS driver public interface
  */
-AUDIOWAVEDRIVER BeOSWaveDriver =
+AUDIOWAVEDRIVER BeOSMediaKitWaveDriver =
 {
     GetAudioCaps, PingAudio, OpenAudio, CloseAudio,
     UpdateAudio, SetAudioCallback
 };
 
-AUDIODRIVER BeOSDriver =
+AUDIODRIVER BeOSMediaKitDriver =
 {
-    &BeOSWaveDriver, NULL
+    &BeOSMediaKitWaveDriver, NULL
 };

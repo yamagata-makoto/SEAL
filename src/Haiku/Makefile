@@ -8,7 +8,7 @@ ARFLAGS = cr
 LIBS = -L../lib/Haiku/ -laudio -lroot -lbe -lmedia
 
 OBJS = audio.o wavfile.o xmfile.o s3mfile.o modfile.o mtmfile.o \
-	iofile.o modeng.o nondrv.o mixdrv.o _mixdrv.o be3drv.o bedrv.o
+	iofile.o modeng.o nondrv.o mixdrv.o _mixdrv.o be3drv.o be4drv.o bedrv.o
 
 LIB = ../lib/Haiku/libaudio.a
 
@@ -19,6 +19,7 @@ mp : mp.o $(LIB)
 	$(CC) -o mp mp.o $(LIBS)
 
 $(LIB) : $(OBJS)
+	@if [ ! -e `dirname $(LIB)` ]; then mkdir -p `dirname $(LIB)`; fi
 	$(AR) $(ARFLAGS) $(LIB) $(OBJS)
 
 .SUFFIXES: .c .cpp .h .obj .S

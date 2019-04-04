@@ -445,7 +445,8 @@ UINT AIAPI AGetVoiceStatus(HAC hVoice, LPBOOL lpnStatus)
  */
 #ifdef __BEOS__
 extern AUDIODRIVER BeOSR3Driver;
-extern AUDIODRIVER BeOSDriver;
+extern AUDIODRIVER BeOSR4Driver;
+extern AUDIODRIVER BeOSMediaKitDriver;
 #endif
 #ifdef __OS2__
 extern AUDIODRIVER OS2MMPMDriver;
@@ -505,7 +506,8 @@ UINT AIAPI AInitialize(VOID)
     ARegisterAudioDriver(&NoneDriver);
 #ifdef __BEOS__
     ARegisterAudioDriver(&BeOSR3Driver);
-    ARegisterAudioDriver(&BeOSDriver);
+    ARegisterAudioDriver(&BeOSR4Driver);
+    ARegisterAudioDriver(&BeOSMediaKitDriver);
 #endif
 #ifdef __OS2__
     ARegisterAudioDriver(&OS2MMPMDriver);

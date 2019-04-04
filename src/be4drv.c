@@ -45,7 +45,7 @@ static UINT AIAPI GetAudioCaps(LPAUDIOCAPS lpCaps)
 {
     static AUDIOCAPS Caps =
     {
-        AUDIO_PRODUCT_BEOS, "BeOS Sound Driver",
+        AUDIO_PRODUCT_BEOS, "BeOS R4 Sound Driver",
         AUDIO_FORMAT_1M08 | AUDIO_FORMAT_1S08 |
         AUDIO_FORMAT_1M16 | AUDIO_FORMAT_1S16 |
         AUDIO_FORMAT_2M08 | AUDIO_FORMAT_2S08 |
@@ -173,13 +173,13 @@ static UINT AIAPI SetAudioCallback(LPFNAUDIOWAVE lpfnAudioWave)
 /*
  * BeOS driver public interface
  */
-AUDIOWAVEDRIVER BeOSWaveDriver =
+AUDIOWAVEDRIVER BeOSR4WaveDriver =
 {
     GetAudioCaps, PingAudio, OpenAudio, CloseAudio,
     UpdateAudio, SetAudioCallback
 };
 
-AUDIODRIVER BeOSDriver =
+AUDIODRIVER BeOSR4Driver =
 {
-    &BeOSWaveDriver, NULL
+    &BeOSR4WaveDriver, NULL
 };
